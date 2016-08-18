@@ -20,9 +20,9 @@ class CrimeData(CsvBase):
     @ref CsvBase.__read_csv_row
     '''
     def read_csv_row(self, csv_row):
-        self._unemployed = csv_row[37]
-        self._pop_dens = csv_row[119]
-        self._crime_per_pop = csv_row[127]
+        self._unemployed = float(csv_row[37])
+        self._pop_dens = float(csv_row[119])
+        self._crime_per_pop = float(csv_row[127])
 
     '''
     Validate if data is list and size of it is 128.

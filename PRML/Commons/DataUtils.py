@@ -19,6 +19,6 @@ def read_wine_data(csv_file_path = WINE_DATA):
 
 # Community and Crimes
 # from http://archive.ics.uci.edu/ml/machine-learning-databases/communities/communities.data
-CRIME_DATA = os.path.join(DATA_DIR, 'data/wine.csv')
+CRIME_DATA = os.path.join(DATA_DIR, 'crime.csv')
 def read_crime_data(csv_file_path=CRIME_DATA):
     return Cd.read_csv_data(csv_file_path)
