@@ -2,7 +2,6 @@
 
 # Import libraries
 import numpy as np
-import csv
 import os
 import PRML.Commons.DataUtils as DataUtils
 
@@ -73,7 +72,7 @@ def target_func(crime_data, weights):
 '''
 Calculate loss for current weight parameter.
 Regularize term is L2 norm.
-@param crime_data : list of learning crime data
+@param crime_data_list : List of crime data to predict crime rate
 @param weights : weight parameter for linear regression
 @param lam : weight parameter for regularize term
 @return loss value
@@ -82,7 +81,7 @@ def loss_func(crime_data_list, weights, lam=REGULARIZE_LAMBDA):
     return sum([(crime_data.get_crime_per_pop()-target_func(crime_data, weights))**2 for crime_data in crime_data_list]) + lam*sum([weight**2 for weight in weights[1:]])
 
 '''
-Calculate differential for weights
+Calculate differential for weights to update weights parameter.
 @param weights : weight parameter for linear regression
 @param crime_data_summarize : CrimeDataSummarize class object
 @param lam : weight parameter for regularize term
@@ -112,7 +111,7 @@ def diff_func(weights, crime_data_summarize, lam=REGULARIZE_LAMBDA):
     return [delta_w0, delta_w1, delta_w2]
 
 '''
-Calculate differential for weights
+Update weigts parameter to decrease loss value for prediction.
 @param weights : weight parameter for linear regression
 @param crime_data_summarize : CrimeDataSummarize class object
 @param lam : weight parameter for regularize term
@@ -124,7 +123,7 @@ def update_weights(weights, crime_data_summarize, lam=REGULARIZE_LAMBDA, learnin
     return [weight + learning_rate*delta for weight, delta in zip(weights, delta_w)]
 
 '''
-Judge if finish training
+Judge if finish training.
 @param old_weights
 @param new_weights
 @param limit : boarder value to finish training
@@ -145,7 +144,6 @@ if __name__ == "__main__":
     weights = [0.0, 0.0, 0.0]
 
     # Training loop
-    print()
     count = 0
     print(FMT_PROGRESS.format(count, weights, loss_func(crime_data_list, weights, lam=REGULARIZE_LAMBDA)))
     while True:

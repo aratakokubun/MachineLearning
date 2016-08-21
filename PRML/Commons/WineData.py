@@ -1,6 +1,7 @@
 # coding: utf-8
 
 # Imports
+import numpy as np
 from PRML.Commons.CsvBase import CsvBase
 
 # Class
@@ -20,20 +21,20 @@ class WineData(CsvBase):
     @ref CsvBase.__read_csv_row
     '''
     def read_csv_row(self, csv_row):
-        self._class = csv_row[0]
-        self._alcohol = csv_row[1]
-        self._malic_acid = csv_row[2]
-        self._ash = csv_row[3]
-        self._alcalinity_of_ash = csv_row[4]
-        self._magnesium = csv_row[5]
-        self._total_phenols = csv_row[6]
-        self._flavanoids = csv_row[7]
-        self._nonflavanoid_phenols = csv_row[8]
-        self._proanthocyanins = csv_row[9]
-        self._color_intensity = csv_row[10]
-        self._hue = csv_row[11]
-        self._diluted_wines = csv_row[12]
-        self._proline = csv_row[13]
+        self._class = int(csv_row[0])
+        self._alcohol = float(csv_row[1])
+        self._malic_acid = float(csv_row[2])
+        self._ash = float(csv_row[3])
+        self._alcalinity_of_ash = float(csv_row[4])
+        self._magnesium = float(csv_row[5])
+        self._total_phenols = float(csv_row[6])
+        self._flavanoids = float(csv_row[7])
+        self._nonflavanoid_phenols = float(csv_row[8])
+        self._proanthocyanins = float(csv_row[9])
+        self._color_intensity = float(csv_row[10])
+        self._hue = float(csv_row[11])
+        self._diluted_wines = float(csv_row[12])
+        self._proline = float(csv_row[13])
 
     '''
     Validate if data is list and size of it is 14.
@@ -56,6 +57,31 @@ class WineData(CsvBase):
     @staticmethod
     def instantinate(csv_row):
         return WineData(csv_row)
+
+    '''
+    Arrage wine data value to numpy array.
+    The order of array member is same as csv source data.
+    @return Numpy array of wine data.
+    '''
+    def to_np_array(self):
+        return np.array([
+        self._class,
+        self._alcohol,
+        self._malic_acid,
+        self._ash,
+        self._alcalinity_of_ash,
+        self._magnesium,
+        self._total_phenols,
+        self._flavanoids,
+        self._nonflavanoid_phenols,
+        self._proanthocyanins,
+        self._color_intensity,
+        self._hue,
+        self._diluted_wines,
+        self._proline,])
+
+    def set_class(self, new_class):
+        self._class = new_class
 
     def get_class(self):
         return self._class
